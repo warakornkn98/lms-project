@@ -1,25 +1,29 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Login from './components/Auth/Login';
-import AdminBooksPage from './pages/AdminBooksPage';
-
-const PrivateRoute = ({ element, ...rest }) => {
-    const isAuthenticated = !!localStorage.getItem('token');
-    return isAuthenticated ? element : <Navigate to="/login" />;
-};
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import NavBar from './Components/NavBar';
+import AddBook from './Components/Pages/AddBook';
+import ShowBook from './Components/Pages/ShowBook';
+import UpdateBook from './Components/Pages/UpdateBook';
+import DeleteBook from './Components/Pages/DeleteBook';
+import Login from './Components/Pages/Login';
+import BookList from './Components/Pages/BookList';
 
 function App() {
-    return (
-        <Router>
-            <Navbar />
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/admin/books" element={<PrivateRoute element={<AdminBooksPage />} />} />
-                <Route path="/" element={<Navigate to="/login" />} />
-            </Routes>
-        </Router>
-    );
+  return (
+    <>  
+      <BrowserRouter>
+      <NavBar/>
+      <Routes>
+      <Route path='/login' element={<Login/>}/>
+        <Route path='/add' element={<AddBook/>}/>
+        <Route path='/show' element={<ShowBook/>}/>
+        <Route path='/book' element={<BookList/>}/>
+        <Route path='/update/:id' element={<UpdateBook/>}/>
+        <Route path='/delete/:id' element={<DeleteBook/>}/>
+      </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default App;
