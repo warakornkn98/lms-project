@@ -1,24 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css'; // Import CSS ที่กำหนดเอง
 
-const Login = () => {
+const Login = ({setRole}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const token = localStorage.getItem('token');
     const navigate = useNavigate();
 
+    useEffect(() => {
+        console.log(token);
+        if (token) {
+          navigate('/');
+        }
+    }, []);
+    
     const handleLogin = async (e) => {
         e.preventDefault();
-
         try {
-            const response = await axios.post('API_URL/login', {
+            const response = await axios.post('http://localhost:5000/api/login', {
                 username: username,
                 password: password
             });
-
+            setRole('admin')
             localStorage.setItem('token', response.data.token);
-            navigate('/admin/books');
+            localStorage.setItem('role', response.data.payload.user.role);
+            navigate(`/admin`);
         } catch (error) {
             alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
         }
