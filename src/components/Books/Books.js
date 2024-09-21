@@ -12,7 +12,7 @@ const Books = () => {
 
     const fetchBooks = async () => {
         const response = await axios.get('http://localhost:5000/api/books', {
-            headers: { authtoken: `${localStorage.getItem('token')}` }
+            // headers: { authtoken: `${localStorage.getItem('token')}` }
         });
         setBooks(response.data);
     };

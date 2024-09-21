@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     console.log(token);
     if (token) {
-      fetchUserRole(token).then((data) => setRole(data));
+      // fetchUserRole(token).then((data) => setRole(data));
     }
   }, []);
 
@@ -43,14 +43,15 @@ function App() {
         {role === 'admin' ? <Navbar setRole={setRole}/> :""}
         {role === 'user' ? <Navbar/> :""}
         <Routes>
-          <Route path='/login' element={<Login setRole={setRole}/>}/>
+          <Route path='/books' element={<Books/>}/>
+          {/* <Route path='/login' element={<Login setRole={setRole}/>}/>
           <Route path="/" element={<Navigate to={ localStorage.getItem('role') ? `/${localStorage.getItem('role')}` : '/login'} />} />
           {role === 'admin' && <Route path="/admin" element={<AdminPage />} />}
           {role === 'admin' && <Route path="/admin/books" element={<Books/>} />}
           {role === 'admin' && <Route path="/admin/books/:id" element={<BookDetail/>} />}
           {role === 'admin' && <Route path="/admin/bookstable" element={<BookTable/>} />}
           {role === 'admin' && <Route path="/admin/addbook" element={<AddBook/>} />}
-          {role === 'admin' && <Route path="/admin/updatebook/:id" element={<UpdateBook />} />}
+          {role === 'admin' && <Route path="/admin/updatebook/:id" element={<UpdateBook />} />} */}
           {/* <Route path="*" element={<Navigate to={ !localStorage.getItem('role') ? '/login' : `/${role}` } />} /> */}
           
         </Routes>
